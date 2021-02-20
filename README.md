@@ -15,7 +15,15 @@ when I can.
 
 To get started install the package within your studio project.
 
-`Command to be added once published to NPM`
+```
+yarn add sanity-plugin-shopify-lookup
+```
+
+Or for NPM
+
+```
+npm i sanity-plugin-shopify-lookup
+```
 
 Add the following environment variables to your Sanity project. For help
 with environment variables in Sanity, [please visit their documentation]().
@@ -24,6 +32,8 @@ with environment variables in Sanity, [please visit their documentation]().
 SANITY_STUDIO_SHOPIFY_TOKEN="<value>"
 SANITY_STUDIO_SHOPIFY_ADMIN_API_URL="<value>"
 ```
+
+Then add `"shopify-lookup"` to your plugins array in `sanity.json`.
 
 Update your schema configuratio to use a the lookup field (more details below)
 and you should be good to go.
@@ -36,7 +46,7 @@ inform me via a Github issue 🙏.
 
 `Embed Loom Video`
 
-## How does it work?
+## How does it work?
 
 The plugin uses the Shopify Admin API to search for products within your
 Shopify inventory. Users of the studio can find products via a text
@@ -90,7 +100,7 @@ use these values as part of a API request to Shopify from your website.
 
 The reason for this approach is because product data can change constantly. If
 this plugin stored additional data, such as the price and description, then
-there is a strong chance that the data in Sanity will be out of date. At the
+there is a strong chance that the data in Shopify could change and therefore Sanity will be out of date. At the
 moment, I have not come up with an efficient way to keep both Sanity and
 Shopify in sync with one another. As my good friend [Sam Beckham](https://twitter.com/samdbeckham)
 would say, I am starting out with the boring solution!
