@@ -1,7 +1,7 @@
 # Shopify Lookup Plugin for Sanity
 
 This is a plugin that gives you the ability to search for Shopify products
-and save them as part of your Sanity documents.
+and save them as part of a document in Sanity.
 
 ## Early Development
 
