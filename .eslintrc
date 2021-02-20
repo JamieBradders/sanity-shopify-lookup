@@ -1,0 +1,17 @@
+{
+  "env": {
+    "browser": true,
+    "node": false
+  },
+  "extends": ["sanity", "prettier"],
+  "parserOptions": {
+    "ecmaVersion": 2018
+  },
+  "rules": {
+    "camelcase": "off",
+    "no-process-env": "off"
+  },
+  "globals": {
+    "process": true
+  }
+}

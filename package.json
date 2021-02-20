@@ -1,0 +1,39 @@
+{
+  "name": "sanity-shopify-lookup",
+  "version": "0.1.0",
+  "description": "Shopify Product Lookup plugin for Sanity",
+  "main": "lib/index.js",
+  "scripts": {
+    "prepublishOnly": "babel -d lib/ src/",
+    "lint": "eslint ./src",
+    "test": "npm run lint"
+  },
+  "keywords": [
+    "sanity",
+    "shopify",
+    "product finder"
+  ],
+  "author": {
+    "name": "Jamie Bradley",
+    "email": "jamie@stackupdigital.co.uk"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/JamieBradders/sanity-shopify-lookup"
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "@babel/cli": "^7.12.17",
+    "@babel/core": "^7.12.17",
+    "@babel/preset-env": "^7.12.17",
+    "@babel/preset-react": "^7.12.13",
+    "eslint": "^7.20.0",
+    "eslint-config-prettier": "^7.2.0",
+    "eslint-config-sanity": "^5.1.0",
+    "eslint-plugin-import": "^2.22.1",
+    "react-hot-loader": "^4.13.0"
+  },
+  "dependencies": {
+    "react": "^17.0.1"
+  }
+}
