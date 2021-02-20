@@ -1,0 +1,12 @@
+{
+  "paths": {
+    "source": "./lib",
+    "compiled": "./lib"
+  },
+  "parts": [
+    {
+      "implements": "part:@sanity/base/schema-type",
+      "path": "schema/objects/productLookup"
+    }
+  ]
+}
