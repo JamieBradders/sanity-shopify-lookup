@@ -48,7 +48,10 @@ I've recorded a very quick demonstration to show you how this should work.
 If you spot any issues or have feedback regarding this documentation, then please
 inform me via a Github issue 🙏.
 
-`Embed Loom Video`
+<a href="https://www.loom.com/share/85929d948c694e60921f40146b538e54">
+  <p>Sanity Shopify Lookup - What To Expect</p>
+  <img style="max-width:300px;" src="https://cdn.loom.com/sessions/thumbnails/85929d948c694e60921f40146b538e54-with-play.gif">
+</a>
 
 ## How does it work?
 
@@ -73,7 +76,7 @@ You can include this within your document configuration like this:
 The product lookup contains the following fields:
 
 ```js
-;[
+[
   {
     name: 'title',
     type: 'string',
