@@ -73,7 +73,7 @@ You can include this within your document configuration like this:
 The product lookup contains the following fields:
 
 ```js
-;[
+[
   {
     name: 'title',
     type: 'string',
