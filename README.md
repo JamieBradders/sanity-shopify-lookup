@@ -69,26 +69,26 @@ You can include this within your document configuration like this:
 The product lookup contains the following fields:
 
 ```js
-[
+;[
   {
-    name: "title",
-    type: "string",
-    validation: (Rule) => Rule.required().error("You must select a product"),
+    name: 'title',
+    type: 'string',
+    validation: (Rule) => Rule.required().error('You must select a product'),
   },
   {
-    name: "images",
-    type: "array",
-    of: [{ type: "url" }],
+    name: 'images',
+    type: 'array',
+    of: [{type: 'url'}],
   },
   {
-    name: "productId",
-    type: "string",
+    name: 'productId',
+    type: 'string',
   },
   {
-    name: "productHandle",
-    type: "string",
+    name: 'productHandle',
+    type: 'string',
   },
-];
+]
 ```
 
 The `title` and `images` fields are primarily used for the purpose of displaying
@@ -116,11 +116,11 @@ which have been added to a Post document in Sanity.
 /**
  * Singular Post
  */
-import ErrorPage from "next/error";
-import { groq } from "next-sanity";
-import { useRouter } from "next/router";
-import { getClient } from "../../lib/sanity";
-import { request } from "../../lib/shopify";
+import ErrorPage from 'next/error'
+import {groq} from 'next-sanity'
+import {useRouter} from 'next/router'
+import {getClient} from '../../lib/sanity'
+import {request} from '../../lib/shopify'
 
 const postQuery = groq`
   *[_type == "post" && slug.current == $slug][0] {
@@ -128,13 +128,13 @@ const postQuery = groq`
     products,
     "slug": slug.current
   }
-`;
+`
 
-function PostTemplate({ post, products }) {
-  const router = useRouter();
+function PostTemplate({post, products}) {
+  const router = useRouter()
 
   if (!router.isFallback && !post?.slug) {
-    return <ErrorPage statusCode={404} />;
+    return <ErrorPage statusCode={404} />
   }
 
   return (
@@ -145,21 +145,21 @@ function PostTemplate({ post, products }) {
           {products.map((product) => {
             // For demo purposes this returns title, but you could return
             // much more e.g. images, price etc
-            return <li key={product.id}>{product.title}</li>;
+            return <li key={product.id}>{product.title}</li>
           })}
         </ul>
       )}
     </article>
-  );
+  )
 }
 
-export async function getStaticProps({ params }) {
-  const post = await getClient().fetch(postQuery, { slug: params.slug });
-  let _products = [];
+export async function getStaticProps({params}) {
+  const post = await getClient().fetch(postQuery, {slug: params.slug})
+  let _products = []
 
   if (post.products?.length > 0) {
     for (const product of post.products) {
-      const variables = { handle: product.productHandle };
+      const variables = {handle: product.productHandle}
 
       const query = `
         query getProductByHandle($handle: String!) {
@@ -168,15 +168,15 @@ export async function getStaticProps({ params }) {
             title
           }
         }
-      `;
+      `
 
-      const res = await request(query, variables);
+      const res = await request(query, variables)
 
       if (res.errors) {
-        console.log(JSON.stringify(res.errors, null, 2));
+        console.log(JSON.stringify(res.errors, null, 2))
       } else {
-        const product = res.productByHandle;
-        _products = [..._products, product];
+        const product = res.productByHandle
+        _products = [..._products, product]
       }
     }
   }
@@ -186,19 +186,19 @@ export async function getStaticProps({ params }) {
       post,
       products: _products,
     },
-  };
+  }
 }
 
 export async function getStaticPaths() {
   const paths = await getClient().fetch(
     groq`*[_type == "post" && defined(slug.current)][].slug.current`
-  );
+  )
 
   return {
-    paths: paths.map((slug) => ({ params: { slug } })),
+    paths: paths.map((slug) => ({params: {slug}})),
     fallback: true,
-  };
+  }
 }
 
-export default PostTemplate;
+export default PostTemplate
 ```
