@@ -32,6 +32,17 @@ npm i sanity-plugin-shopify-lookup
 Add the following environment variables to your Sanity project. For help
 with environment variables in Sanity, [please visit their documentation]().
 
+**Please Note:** this plugin requires API credentials for the Shopify Storefront
+GraphQL API. Instructions for retrieving these details can be found in
+the [Shopify documentation](https://shopify.dev/docs/storefront-api/getting-started).
+
+When setting the Storefront API Permissions, please ensure the following options
+are selected:
+
+- Read products, variants, and collections
+  - Read product tags
+  - Read inventory of products and their variants
+
 ```
 SANITY_STUDIO_SHOPIFY_TOKEN="<value>"
 SANITY_STUDIO_SHOPIFY_API_URL="<value>"
