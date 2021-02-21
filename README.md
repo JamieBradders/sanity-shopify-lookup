@@ -34,7 +34,7 @@ with environment variables in Sanity, [please visit their documentation]().
 
 ```
 SANITY_STUDIO_SHOPIFY_TOKEN="<value>"
-SANITY_STUDIO_SHOPIFY_ADMIN_API_URL="<value>"
+SANITY_STUDIO_SHOPIFY_API_URL="<value>"
 ```
 
 Then add `"shopify-lookup"` to your plugins array in `sanity.json`.
@@ -76,7 +76,7 @@ You can include this within your document configuration like this:
 The product lookup contains the following fields:
 
 ```js
-[
+;[
   {
     name: 'title',
     type: 'string',
