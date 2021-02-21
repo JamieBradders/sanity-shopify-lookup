@@ -11,6 +11,10 @@ is in its very early stages of development. There may be bugs. If you do
 find a bug, then please feel free to raise an issue and I'll take a look
 when I can.
 
+## Top Tip
+
+If you want to fork this project and play around with the code then please note that I developed this plugin with the help of a tool called [Sanipack](https://github.com/rexxars/sanipack). Before this toolkit was developed, I thought developing plugins for Sanity was a bit of a dark art. However, this toolkit takes away a lot of the setup that is required in creating a plugin and also contains some useful verification tools that you can run before publishing to a package manager. Whether you are looking to tweak this plugin or work on your own plugin, you should definitely use sanipack.
+
 ## Get Started
 
 To get started install the package within your studio project.
