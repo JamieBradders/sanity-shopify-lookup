@@ -1,0 +1,54 @@
+{
+  "name": "sanity-plugin-shopify-lookup",
+  "version": "0.1.2",
+  "description": "A Sanity Plugin that lets you search and reference shopify products against Sanity Documents",
+  "main": "lib/schema/objects/productLookup.js",
+  "scripts": {
+    "build": "sanipack build",
+    "watch": "sanipack build --watch",
+    "prepublishOnly": "sanipack build && sanipack verify"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/JamieBradders/sanity-shopify-lookup.git"
+  },
+  "keywords": [
+    "sanity",
+    "sanity-plugin"
+  ],
+  "author": "Jamie Bradley <jamie@stackupdigital.co.uk>",
+  "license": "MIT",
+  "dependencies": {
+    "@sanity/ui": "^0.33.4"
+  },
+  "devDependencies": {
+    "eslint": "7.20.0",
+    "eslint-config-prettier": "7.2.0",
+    "eslint-config-sanity": "5.1.0",
+    "eslint-plugin-react": "7.22.0",
+    "prettier": "2.2.1",
+    "sanipack": "1.0.8"
+  },
+  "peerDependencies": {
+    "react": "^17.0.0"
+  },
+  "bugs": {
+    "url": "https://github.com/JamieBradders/sanity-shopify-lookup/issues"
+  },
+  "homepage": "https://github.com/JamieBradders/sanity-shopify-lookup#readme",
+  "prettier": {
+    "semi": false,
+    "printWidth": 100,
+    "bracketSpacing": false,
+    "singleQuote": true
+  },
+  "eslintConfig": {
+    "parser": "sanipack/babel/eslint-parser",
+    "extends": [
+      "sanity",
+      "sanity/react",
+      "prettier",
+      "prettier/react"
+    ]
+  }
+}
