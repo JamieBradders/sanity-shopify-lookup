@@ -1,6 +1,6 @@
 {
   "name": "sanity-plugin-shopify-lookup",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "A Sanity Plugin that lets you search and reference shopify products against Sanity Documents",
   "main": "lib/schema/objects/productLookup.js",
   "scripts": {
