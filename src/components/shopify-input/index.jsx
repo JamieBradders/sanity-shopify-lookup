@@ -1,5 +1,5 @@
-import * as React from "react";
-import FormField from "part:@sanity/components/formfields/default";
+import * as React from 'react'
+import FormField from 'part:@sanity/components/formfields/default'
 import {
   Stack,
   Card,
@@ -13,111 +13,99 @@ import {
   Text,
   Heading,
   Radio,
-} from "@sanity/ui";
-import { patches, PatchEvent } from "part:@sanity/form-builder";
-import { request } from "../../graphql-request";
-import { productByTerm } from "../../graphql-request/queries";
+} from '@sanity/ui'
+import {patches, PatchEvent} from 'part:@sanity/form-builder'
+import {request} from '../../graphql-request'
+import {productByTerm} from '../../graphql-request/queries'
 
 // Lookup component, this will be moved
-const Lookup = ({ searchCallback }) => {
-  const [term, setTerm] = React.useState("");
-  const [loading, setLoading] = React.useState(false);
+const Lookup = ({searchCallback}) => {
+  const [term, setTerm] = React.useState('')
+  const [loading, setLoading] = React.useState(false)
 
   const handleInputChange = (event) => {
-    const { value } = event.target;
-    setTerm(value);
-  };
+    const {value} = event.target
+    setTerm(value)
+  }
 
   const handleButtonClick = async (event) => {
-    event.preventDefault();
+    event.preventDefault()
 
     // If the search term is less than 3 characters, then ensure the
     // query can't be performed. This code prevents submission by
     // return key on keyboard
     if (term.length < 3) {
-      return false;
+      return false
     }
 
-    setLoading(true);
+    setLoading(true)
 
     try {
-      const query = productByTerm;
-      const variables = { term: `title:${term}*` };
-      const res = await request(query, variables);
+      const query = productByTerm
+      const variables = {term: `title:${term}*`}
+      const res = await request(query, variables)
 
       if (!res.data.products) {
-        console.error("Unable to get products from shopify", data);
+        console.error('Unable to get products from shopify', data)
       } else {
-        searchCallback(res.data.products);
+        searchCallback(res.data.products)
       }
 
-      setLoading(false);
+      setLoading(false)
     } catch (err) {
-      console.error("Problem getting products:", err);
-      setLoading(false);
+      console.error('Problem getting products:', err)
+      setLoading(false)
     }
-  };
+  }
 
   return (
     <form onSubmit={handleButtonClick}>
       <Flex>
         <Box flex={1} marginRight={2}>
-          <TextInput
-            value={term}
-            width="100%"
-            flex={1}
-            onChange={handleInputChange}
-          />
+          <TextInput value={term} width="100%" flex={1} onChange={handleInputChange} />
         </Box>
 
         {loading ? (
-          <Flex align="center" justify="center" style={{ width: 60 }}>
+          <Flex align="center" justify="center" style={{width: 60}}>
             <Spinner muted />
           </Flex>
         ) : (
-          <Button
-            text="Search"
-            tone="primary"
-            type="submit"
-            disabled={term.length < 3}
-          />
+          <Button text="Search" tone="primary" type="submit" disabled={term.length < 3} />
         )}
       </Flex>
     </form>
-  );
-};
+  )
+}
 
-export const ShopifyInput = ({ type, onChange, value }) => {
-  const [results, setResults] = React.useState();
-  const [selectedItem, setSelectedItem] = React.useState();
+export const ShopifyInput = ({type, onChange, value}) => {
+  const [results, setResults] = React.useState()
+  const [selectedItem, setSelectedItem] = React.useState()
 
-  const callback = (products) => setResults(products.edges);
+  const callback = (products) => setResults(products.edges)
 
   const handleSelection = (value, item) => {
-    const { set } = patches;
+    const {set} = patches
 
     // Update local state so user knows what is selectd
-    setSelectedItem(value);
+    setSelectedItem(value)
 
     // Update sanity data
-    onChange(PatchEvent.from(set(item.node.id, ["productId"])));
-    onChange(PatchEvent.from(set(item.node.handle, ["productHandle"])));
-    onChange(PatchEvent.from(set(item.node.title, ["title"])));
-    onChange(PatchEvent.from(set(item.node.images.edges, ["images"])));
-  };
+    onChange(PatchEvent.from(set(item.node.id, ['productId'])))
+    onChange(PatchEvent.from(set(item.node.handle, ['productHandle'])))
+    onChange(PatchEvent.from(set(item.node.title, ['title'])))
+    onChange(PatchEvent.from(set(item.node.images.edges, ['images'])))
+  }
 
   return (
     <ThemeProvider theme={studioTheme}>
       {value && value.title && (
         <Box marginBottom={4}>
           <Box marginBottom={4}>
-            <Heading as="h3" size={1} style={{ marginBottom: 12 }}>
+            <Heading as="h3" size={1} style={{marginBottom: 12}}>
               Selected Product
             </Heading>
 
-            <Text>
-              This is the product that you have selected from Shopify.
-            </Text>
+            <Text>This is the product that you have selected from Shopify.</Text>
           </Box>
 
           <Card radius={2} shadow={1}>
@@ -127,7 +115,7 @@ export const ShopifyInput = ({ type, onChange, value }) => {
                   src={value.images[0].node.transformedSrc}
                   width="50"
                   height="50"
-                  style={{ objectFit: "cover" }}
+                  style={{objectFit: 'cover'}}
                 />
               )}
 
@@ -148,22 +136,21 @@ export const ShopifyInput = ({ type, onChange, value }) => {
           <>
             <Box marginY={4}>
               <Text size={1}>
-                Found {results.length}{" "}
-                {results.length === 1 ? "result" : "results"}
+                Found {results.length} {results.length === 1 ? 'result' : 'results'}
               </Text>
             </Box>
             <Stack space={3}>
               {results.map((result) => {
-                const { node } = result;
+                const {node} = result
                 return (
                   <Card radius={2} shadow={1} key={node.id}>
                     <Flex width="100%" align="center">
-                      {node.images && (
+                      {node.images?.edges && (
                         <img
                           src={node.images.edges[0].node.transformedSrc}
                           width="50"
                           height="50"
-                          style={{ objectFit: "cover" }}
+                          style={{objectFit: 'cover'}}
                         />
                       )}
 
@@ -175,21 +162,19 @@ export const ShopifyInput = ({ type, onChange, value }) => {
                               id={`product-${node.id}`}
                               value={node.id}
                               checked={selectedItem === node.id}
-                              onChange={(e) =>
-                                handleSelection(e.target.value, result)
-                              }
+                              onChange={(e) => handleSelection(e.target.value, result)}
                             />
                           </Flex>
                         </label>
                       </Box>
                     </Flex>
                   </Card>
-                );
+                )
               })}
             </Stack>
           </>
         )}
       </FormField>
     </ThemeProvider>
-  );
-};
+  )
+}
