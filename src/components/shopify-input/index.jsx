@@ -110,7 +110,7 @@ export const ShopifyInput = ({type, onChange, value}) => {
 
           <Card radius={2} shadow={1}>
             <Flex width="100%" align="center">
-              {value.images && (
+              {value.images?.length > 0 && (
                 <img
                   src={value.images[0].node.transformedSrc}
                   width="50"
@@ -145,7 +145,7 @@ export const ShopifyInput = ({type, onChange, value}) => {
                 return (
                   <Card radius={2} shadow={1} key={node.id}>
                     <Flex width="100%" align="center">
-                      {node.images?.edges && (
+                      {node.images?.edges?.length > 0 && (
                         <img
                           src={node.images.edges[0].node.transformedSrc}
                           width="50"
